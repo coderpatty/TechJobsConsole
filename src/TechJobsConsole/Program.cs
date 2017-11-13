@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace TechJobsConsole
 {
     class Program
@@ -70,6 +71,7 @@ namespace TechJobsConsole
                         searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
                         PrintJobs(searchResults);
                     }
+                                       
                 }
             }
         }
@@ -118,7 +120,16 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("printJobs is not implemented yet");
+            foreach (Dictionary<string, string> job1 in someJobs)
+            {
+                string JobInfo = "\n****\n";
+                foreach (string key in job1.Keys)
+                {
+                    JobInfo += (key + ": " + job1[key] + "\n");
+                }
+                JobInfo += "*****";
+                Console.WriteLine(JobInfo);
+            }
         }
     }
 }
