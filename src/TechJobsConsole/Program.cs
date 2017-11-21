@@ -139,15 +139,16 @@ namespace TechJobsConsole
                     
                 {
                     
-                    Console.WriteLine("?\n *******");
+                    Console.WriteLine("\n ******* \n");
+
                     foreach (KeyValuePair<string, string> itemline in item)
                     {
-                        if (itemline.Key != "S.no")
+                        if (itemline.Key != null)
                         {
                             Console.WriteLine(itemline.Key + ": " + itemline.Value);
                         }
                     }
-                    Console.WriteLine("*********\n");
+                    Console.WriteLine("\n *********\n");
                 }
             }
 
