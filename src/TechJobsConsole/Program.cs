@@ -31,6 +31,7 @@ namespace TechJobsConsole
 
                 string actionChoice = GetUserSelection("View Jobs", actionChoices);
 
+                
                 if (actionChoice.Equals("list"))
                 {
                     string columnChoice = GetUserSelection("List", columnChoices);
@@ -64,14 +65,18 @@ namespace TechJobsConsole
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                        Console.WriteLine("Search all fields not yet implemented");
+                        searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
                     }
+                        
                     else
                     {
                         searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
                         PrintJobs(searchResults);
+
                     }
-                                       
+                                      
                 }
             }
         }
@@ -106,7 +111,7 @@ namespace TechJobsConsole
 
                 if (choiceIdx < 0 || choiceIdx >= choiceKeys.Length)
                 {
-                    Console.WriteLine("Invalid choices. Try again.");
+                    Console.WriteLine("Invalid choice. Try again.");
                 }
                 else
                 {
@@ -120,16 +125,32 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            foreach (Dictionary<string, string> job1 in someJobs)
+            int count = someJobs.Count;
+
+            if (count==0)
             {
-                string JobInfo = "\n****\n";
-                foreach (string key in job1.Keys)
-                {
-                    JobInfo += (key + ": " + job1[key] + "\n");
-                }
-                JobInfo += "*****";
-                Console.WriteLine(JobInfo);
+               Console.WriteLine("No items were found.  Please try a different search.");
+                 
             }
+
+            else
+            {
+                foreach(Dictionary<string, string> item in someJobs)
+                    
+                {
+                    
+                    Console.WriteLine("?\n *******");
+                    foreach (KeyValuePair<string, string> itemline in item)
+                    {
+                        if (itemline.Key != "S.no")
+                        {
+                            Console.WriteLine(itemline.Key + ": " + itemline.Value);
+                        }
+                    }
+                    Console.WriteLine("*********\n");
+                }
+            }
+
         }
     }
 }
